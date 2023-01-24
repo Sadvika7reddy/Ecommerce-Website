@@ -1,23 +1,21 @@
 import { Button,Navbar,Container } from 'react-bootstrap';
-import React from 'react';
+import React,{useState} from 'react';
 import Products from './components/Products';
 import AddCart from './components/AddCart';
+import Header from './components/Header';
+import CartItem from './components/CartItem/CartItem'
 function App() {
+  const[create,setCreate]=useState(false)
+  const CartHandler=()=>{
+    setCreate(true);
+  }
+  const HideHandler=()=>{
+    setCreate(false);
+  }
   return (
     <div>
-      <Navbar bg='dark' expand='sm' variant='dark'>
-        <Container>
-          <Navbar.Brand>Home</Navbar.Brand>
-          <Navbar.Brand>Stored</Navbar.Brand>
-          <Navbar.Brand>About</Navbar.Brand>
-          <Button variant="info">Cart</Button>{' '}
-        </Container>
-      </Navbar>
-      <Navbar bg='success' expand='sm' variant='light'>
-        <Container>
-          <h1 className='p-4'>The Generics</h1>
-        </Container>
-      </Navbar> 
+      <Header onShowCart={CartHandler}/>
+      {create&&<CartItem onClose={HideHandler}/>}
       <Products/> 
       <AddCart/>   
     </div>

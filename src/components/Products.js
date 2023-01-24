@@ -18,6 +18,7 @@ let productsArr=[
         price: 50,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
+
         
         },
         
@@ -28,6 +29,7 @@ let productsArr=[
         price: 70,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
+
         
         },
         
