@@ -1,33 +1,20 @@
-import React, { Fragment} from 'react';
+import React, { Fragment,useContext} from 'react';
 import { Button,Figure,Container,Row,Col,Card } from 'react-bootstrap';
 import Model from '../UI/Model';
 import classes from './CartItem.module.css'
-let cartElemnts=[
-    {
-
-        title:'Album 1',
-        
-        price: 100,
-        
-        imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-        quantity:1
-        
-        },
-        
-        {
-        
-        title: 'Album 2',
-        
-        price: 50,
-        
-        imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-        quantity:2
-
-        
-        }
-    ]
+import CartContext from '../store/CartContext';
 const CartItem=(props)=>{
-    const CartItems=<ul >{cartElemnts.map(item=>
+    const Cartcntx=useContext(CartContext);
+    const totalAmount=Cartcntx.totalAmount;
+    const onRemoveHandler=id=>{
+        Cartcntx. removeItem(id);
+
+    }
+    const onAddHandler=item=>{
+        Cartcntx.addItem({...item,quantity:1})
+
+    }
+    const CartItems=<ul >{Cartcntx.items.map(item=>
         <li >
             <div>
             <Figure>
@@ -37,12 +24,16 @@ const CartItem=(props)=>{
         alt="100x100"
         src={item.imageUrl}
       />
-      </Figure>  Item:{item.title}  price:{item.price}   Quantity:{item.quantity} <Button variant='warning'>cancel</Button>
+      </Figure>  Item:{item.title}  price:{item.amount}   Quantity:{item.quantity}
+      <div>
+            <button onClick={onRemoveHandler.bind(null,item.id)}>-</button>
+            <button onClick={onAddHandler.bind(null,item)}>+</button>
+        </div>
       </div>
         </li>)}</ul>
     return(
         <div class="justify-content-end">
-            <Container>
+            <Container>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                 <Row>
                     <Col xs={7}>
                         <Card>
@@ -57,7 +48,7 @@ const CartItem=(props)=>{
                                 {CartItems}
                                 <div className={classes.total}>
                                     <span>Total Amount:</span>
-                                    <span >$123</span>
+                                    <span >{totalAmount}</span>
                                 </div>
                             <div class="position-relative">
                                 <div class="position-absolute top-0 start-50 translate-middle-x">

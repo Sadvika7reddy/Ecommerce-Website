@@ -1,13 +1,17 @@
-import React,{Fragment} from 'react';
+import React,{Fragment,useContext} from 'react';
 import { Card, Container,Row,Col,Figure, Button } from 'react-bootstrap';
+import CartContext from './store/CartContext';
+import AddCart from './AddCart';
 let productsArr=[
     {
 
         title:'Album 1',
         
-        price: 100,
+        amount: 100,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
+        id:'s1',
+        quantity:1
         
         },
         
@@ -15,42 +19,46 @@ let productsArr=[
         
         title: 'Album 2',
         
-        price: 50,
+        amount: 50,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-
-        
+        id:'s2',
+        quantity:1
         },
         
         {
         
         title: 'Album 3',
         
-        price: 70,
+        amount: 70,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-
-        
+        id:'s3',
+        quantity:1
         },
         
         {
         
         title: 'Album 4',
         
-        price: 100,
+        amount: 100,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
+        id:'s4',
+        quantity:1
         
         }
 ]
-const Products=()=>{
+const Products=(props)=>{
+    const Cartcntx=useContext(CartContext)
+    
     let List=productsArr.map(item=><li >
         <Container>
                 <Row>
                     <Col xs={7}>
                         <Card>
                             <Card.Body><h2>{item.title}</h2>
-    <h6 style={{textAlign:'revert'}}>${item.price}</h6> <Figure>
+    <h6 style={{textAlign:'revert'}}>${item.amount}</h6> <Figure>
       <Figure.Image
         width={171}
         height={180}
@@ -58,9 +66,7 @@ const Products=()=>{
         src={item.imageUrl}
       />
       </Figure>
-      <div class="position-end">
-      <Button variant="info">Add to Cart</Button>{' '}
-      </div>
+      <AddCart item={item}/>
       </Card.Body>
       
                         </Card>

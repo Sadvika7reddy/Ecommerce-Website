@@ -4,6 +4,7 @@ import Products from './components/Products';
 import AddCart from './components/AddCart';
 import Header from './components/Header';
 import CartItem from './components/CartItem/CartItem'
+import CreateProvider from './components/store/CreateProvider';
 function App() {
   const[create,setCreate]=useState(false)
   const CartHandler=()=>{
@@ -13,12 +14,11 @@ function App() {
     setCreate(false);
   }
   return (
-    <div>
+    <CreateProvider>
       <Header onShowCart={CartHandler}/>
       {create&&<CartItem onClose={HideHandler}/>}
-      <Products/> 
-      <AddCart/>   
-    </div>
+      <Products/>   
+    </CreateProvider>
   );
 } 
 

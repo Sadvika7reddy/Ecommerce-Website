@@ -1,11 +1,17 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { Button } from 'react-bootstrap';
-const AddCart=()=>{
+import { propTypes } from 'react-bootstrap/esm/Image';
+import CartContext from './store/CartContext';
+const AddCart=(props)=>{
+    const Cartcntx=useContext(CartContext)
+    
+    const EventHandler=(event)=>{
+        event.preventDefault();
+        Cartcntx.addItem(props.item);
+    }
     return (
-        <div class="position-relative">
-            <div class="position-absolute top-0 start-50 translate-middle-x">
-            <Button variant="secondary">See the Cart</Button>{' '}
-            </div>    
+        <div class="position-end">
+        <Button variant="info" onClick={EventHandler}>Add to Cart</Button>{' '}
         </div>
     )
 }
