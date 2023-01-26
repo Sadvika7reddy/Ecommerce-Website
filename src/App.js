@@ -5,6 +5,10 @@ import AddCart from './components/AddCart';
 import Header from './components/Header';
 import CartItem from './components/CartItem/CartItem'
 import CreateProvider from './components/store/CreateProvider';
+import Empty from './components/Router/Empty';
+import Router from './components/Router/Router';
+import { createBrowserRouter,RouterProvider} from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 function App() {
   const[create,setCreate]=useState(false)
   const CartHandler=()=>{
@@ -20,6 +24,5 @@ function App() {
       <Products/>   
     </CreateProvider>
   );
-} 
-
+}  
 export default App;

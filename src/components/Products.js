@@ -2,6 +2,7 @@ import React,{Fragment,useContext} from 'react';
 import { Card, Container,Row,Col,Figure, Button } from 'react-bootstrap';
 import CartContext from './store/CartContext';
 import AddCart from './AddCart';
+import Cart from './Cart'
 let productsArr=[
     {
 
@@ -75,7 +76,7 @@ const Products=(props)=>{
             </Container>
     </li>)
         return(
-       <Fragment> 
+       <Fragment>         
             <h2 style={{textAlign:"center"}}>Music</h2>   
             <div>{List}</div>
         </Fragment>

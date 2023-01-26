@@ -1,14 +1,19 @@
 import React from 'react';
 import {Navbar,Button,Container} from 'react-bootstrap';
 import Cart from './Cart';
+import {Link,Outlet} from 'react-router-dom';
 const Header=(props)=>{
     return(
         <div>
             <Navbar bg='dark' expand='sm' variant='dark'>
         <Container>
-          <Navbar.Brand>Home</Navbar.Brand>
+          <Navbar.Brand>
+           <Link to='/home'>Home</Link>
+          </Navbar.Brand>
           <Navbar.Brand>Stored</Navbar.Brand>
-          <Navbar.Brand>About</Navbar.Brand>
+          <Navbar.Brand>
+           <Link to='/products'>About</Link>
+          </Navbar.Brand>
           <Cart onShow={props.onShowCart}/>
         </Container>
       </Navbar>
