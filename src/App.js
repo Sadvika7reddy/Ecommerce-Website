@@ -5,10 +5,8 @@ import AddCart from './components/AddCart';
 import Header from './components/Header';
 import CartItem from './components/CartItem/CartItem'
 import CreateProvider from './components/store/CreateProvider';
-import Empty from './components/Router/Empty';
 import Router from './components/Router/Router';
-import { createBrowserRouter,RouterProvider} from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import Cart from './components/Cart';
 function App() {
   const[create,setCreate]=useState(false)
   const CartHandler=()=>{
@@ -19,9 +17,11 @@ function App() {
   }
   return (
     <CreateProvider>
-      <Header onShowCart={CartHandler}/>
-      {create&&<CartItem onClose={HideHandler}/>}
-      <Products/>   
+      <Container>
+      <Cart onShowCart={CartHandler}/>
+      </Container>
+      <Products />
+      {create&&<CartItem onClose={HideHandler}/>}   
     </CreateProvider>
   );
 }  

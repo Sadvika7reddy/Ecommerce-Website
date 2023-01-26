@@ -9,8 +9,8 @@ const Cart=(props)=>{
     })
     return(
         <div>
-            <Button variant="info" onClick={props.onShow}>Cart</Button>{' '}
-            <span style={{color: 'white'}}>{quantity}</span>
+            <Button variant="info" onClick={props.onShowCart}>Cart</Button>{' '}
+            <span style={{color: 'Black'}}>{quantity}</span>
         </div>
     )
 }
