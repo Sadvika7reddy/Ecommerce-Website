@@ -16,6 +16,9 @@ const Header=(props)=>{
           <Navbar.Brand>
            <Link to='/products'>About</Link>
           </Navbar.Brand>
+          <Navbar.Brand>
+            <Link to='/contact'>Contact us</Link>
+          </Navbar.Brand>
         </Container>
       </Navbar>
       <Navbar bg='success' expand='sm' variant='light'>
