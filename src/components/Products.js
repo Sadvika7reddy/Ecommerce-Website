@@ -1,8 +1,10 @@
 import React,{Fragment,useContext} from 'react';
 import { Card, Container,Row,Col,Figure, Button } from 'react-bootstrap';
 import CartContext from './store/CartContext';
+import { Link } from 'react-router-dom';
 import AddCart from './AddCart';
 import Cart from './Cart'
+import ProductDetails from './Router/ProductDetails';
 let productsArr=[
     {
 
@@ -53,12 +55,14 @@ let productsArr=[
 const Products=(props)=>{
     const Cartcntx=useContext(CartContext)
     
-    let List=productsArr.map(item=><li >
+    let List=productsArr.map(item=><li key={item.id} >
         <Container>
                 <Row>
                     <Col xs={7}>
                         <Card>
-                            <Card.Body><h2>{item.title}</h2>
+                            <Card.Body><h2>
+                                <Link to={`/home/${item.id}`}>{item.title}</Link>
+                            </h2>
     <h6 style={{textAlign:'revert'}}>${item.amount}</h6> <Figure>
       <Figure.Image
         width={171}
@@ -77,9 +81,10 @@ const Products=(props)=>{
     </li>)
         return(
        <Fragment>
+        
             <h2 style={{textAlign:"center"}}>Music</h2>   
-            <div>{List}</div>
+           <div>{List}</div>
         </Fragment>
-    )
+    ) 
 }
 export default Products;

@@ -3,9 +3,10 @@ import App from './App';
 import Router from './components/Router/Router';
 import { createBrowserRouter,RouterProvider} from 'react-router-dom';
 import RootLayout from './components/Router/RootLayout';
-import Header from './components/Header';
 import Home from './components/Router/Home';
 import Contact from './components/Router/Contact';
+import ProductDetails from './components/Router/ProductDetails';
+
 const Apps=()=>{
     async function EventItemhandler(expenceData){
         const response=await fetch('https://add-movies-c908f-default-rtdb.firebaseio.com/details.json',{
@@ -27,7 +28,8 @@ const Apps=()=>{
             {path:'/home',element:<App/>},
             {path:'/products',element:<Router/>},
             {path:'/store',element:<Home/>},
-            {path:'/contact',element:<Contact onAddDetails={EventItemhandler}/>}
+            {path:'/contact',element:<Contact onAddDetails={EventItemhandler}/>},
+            {path:'/home/:productId',element:<ProductDetails/>}
         ],
     },    
       ])
