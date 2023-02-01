@@ -6,6 +6,7 @@ import RootLayout from './components/Router/RootLayout';
 import Home from './components/Router/Home';
 import Contact from './components/Router/Contact';
 import ProductDetails from './components/Router/ProductDetails';
+import Login from './components/Router/Login';
 
 const Apps=()=>{
     async function EventItemhandler(expenceData){
@@ -29,7 +30,8 @@ const Apps=()=>{
             {path:'/products',element:<Router/>},
             {path:'/store',element:<Home/>},
             {path:'/contact',element:<Contact onAddDetails={EventItemhandler}/>},
-            {path:'/home/:productId',element:<ProductDetails/>}
+            {path:'/home/:productId',element:<ProductDetails/>},
+            {path:'/login',element:<Login/>}
         ],
     },    
       ])
