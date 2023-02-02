@@ -1,8 +1,9 @@
 import {Fragment,useRef,useState,useContext} from 'react';
 import AuthContext from '../UI/Context';
 import classes from './Login.module.css';
+import { useNavigate } from 'react-router-dom';
 const Login=()=>{
-    
+    const history=useNavigate();
     const Authcntx=useContext(AuthContext)
     const emailInputRef=useRef();
     const passwordInputRef=useRef();
@@ -38,15 +39,15 @@ const Login=()=>{
               })
             }
         }).then((data)=>{
-            Authcntx.logIn(data.idToken)
-            console.log(data);
+            Authcntx.logIn(data.idToken);
+            history('/home')
           })
           .catch((err)=>{
             alert(err.message)
           })
-    
-    
-
+    } 
+    const LogOutHandler=()=>{
+      Authcntx.logOut();
     }
     return(
         <Fragment>
@@ -59,10 +60,11 @@ const Login=()=>{
                     </div>
                     <div>
                     <label>Password</label>
-                    <input type='number' required ref={passwordInputRef}/><br/>
+                    <input type='password' required ref={passwordInputRef}/><br/>
                     &nbsp;
                     </div>
                     <button type='submit'>Login</button>
+                    <button type='submit' onClick={LogOutHandler}>LogOut</button>
             </form> 
         </Fragment>
     )

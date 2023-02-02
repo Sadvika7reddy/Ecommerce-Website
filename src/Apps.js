@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import App from './App';
 import Router from './components/Router/Router';
 import { createBrowserRouter,RouterProvider} from 'react-router-dom';
@@ -7,15 +7,18 @@ import Home from './components/Router/Home';
 import Contact from './components/Router/Contact';
 import ProductDetails from './components/Router/ProductDetails';
 import Login from './components/Router/Login';
+import { Navigate } from 'react-router-dom';
+import AuthContext from './components/UI/Context';
 
 const Apps=()=>{
+    const Authcntx=useContext(AuthContext)
     async function EventItemhandler(expenceData){
         const response=await fetch('https://add-movies-c908f-default-rtdb.firebaseio.com/details.json',{
             method:'POST',
             body:JSON.stringify(expenceData),
             headers:{
                 'content-type':'application/json'
-            }
+            } 
         }
         )
 

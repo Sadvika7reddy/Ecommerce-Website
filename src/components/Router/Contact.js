@@ -1,6 +1,5 @@
 import React,{Fragment,useState} from 'react';
 import {Button, Card, Container,Row,Col} from 'react-bootstrap';
-import { propTypes } from 'react-bootstrap/esm/Image';
 const Contact=(props)=>{
     const [name,setName]=useState('');
     const [email,setEmail]=useState('');
