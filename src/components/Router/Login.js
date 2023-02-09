@@ -11,6 +11,7 @@ const Login=()=>{
         event.preventDefault();
         const enteredEmail=emailInputRef.current.value;
         const enteredPassword=passwordInputRef.current.value;
+      localStorage.setItem('email',enteredEmail);
       
       fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCewUWbgztJYjhsb5UEmf3Ni6T_ehpNmXQ',{
             method:'POST',
@@ -27,7 +28,7 @@ const Login=()=>{
           }
           ).then(res=>{
             if(res.ok){
-                console.log(res);
+                
               return res.json();
               
     
@@ -40,7 +41,7 @@ const Login=()=>{
             }
         }).then((data)=>{
             Authcntx.logIn(data.idToken);
-            history('/home')
+            history('/')
           })
           .catch((err)=>{
             alert(err.message)

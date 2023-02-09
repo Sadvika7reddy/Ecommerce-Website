@@ -9,11 +9,13 @@ import Router from './components/Router/Router';
 import Cart from './components/Cart';
 import AuthContext from './components/UI/Context';
 import { Navigate } from 'react-router-dom';
+import axios from 'axios';
 function App() {
   const Authcntx=useContext(AuthContext)
   const[create,setCreate]=useState(false)
   const CartHandler=()=>{
     setCreate(true);
+   
   }
   const HideHandler=()=>{
     setCreate(false);
@@ -23,9 +25,10 @@ function App() {
       <Container>
       <Cart onShowCart={CartHandler}/>
       </Container>
+      {create&&<CartItem onClose={HideHandler}/>}  
       {Authcntx.isLoggedIn&&<Products />}
       {!Authcntx.isLoggedIn&&<Navigate to='/login'/>}
-      {create&&<CartItem onClose={HideHandler}/>}   
+       
     </CreateProvider>
   );
 }  

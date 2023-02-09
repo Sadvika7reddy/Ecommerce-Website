@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card ,Container,Col,Row,Figure} from 'react-bootstrap';
 import Products from '../Products';
+import { useParams } from 'react-router-dom';
 let productsArr=[
     {
 

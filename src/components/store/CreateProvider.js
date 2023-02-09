@@ -1,5 +1,6 @@
 import CartContext from './CartContext';
 import {useState,useReducer} from 'react'
+import axios from 'axios';
 const defaultCartState={
     items:[],
     totalAmount:0,
@@ -15,6 +16,7 @@ const cartreducer=(state,action)=>{
         let updatedItems;
         if(existingCart)
         {
+          
             const updatedItem={
                 ...existingCart,
                 quantity:existingCart.quantity+action.item.quantity
@@ -24,6 +26,8 @@ const cartreducer=(state,action)=>{
         }
         else{ 
             updatedItems=state.items.concat(action.item);
+            
+            
         }
               return{
             items:updatedItems,
@@ -58,7 +62,11 @@ const cartreducer=(state,action)=>{
 
 
     }
-    return defaultCartState;
+    
+        return defaultCartState
+
+
+
 }
 const CreateProvider=(props)=>{
     const [cartstate,cartAction]=useReducer(cartreducer,defaultCartState)
