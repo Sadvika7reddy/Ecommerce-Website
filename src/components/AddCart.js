@@ -14,7 +14,7 @@ const AddCart=(props)=>{
         const user=userEmail.replace('.','q');
         const users=user.replace('@','s')
         console.log(users);
-            axios.post(`https://crudcrud.com/api/7f3dc144d9f444408cf9c034830d8705/${users}`,obj)
+            axios.post(`https://crudcrud.com/api/a6be8c49618848a6b5302fd47926cd86/${users}`,obj)
                 .then((res)=>{
                    setName(res.data);
                 }) 

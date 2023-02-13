@@ -47,7 +47,10 @@ const Login=()=>{
             alert(err.message)
           })
     } 
+   
     const LogOutHandler=()=>{
+      
+      
       Authcntx.logOut();
     }
     return(

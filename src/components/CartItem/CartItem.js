@@ -17,7 +17,7 @@ const CartItem=(props)=>{
    
     const onRemoveHandler= async (id)=>{
        
-        let res=await axios.delete(`https://crudcrud.com/api/7f3dc144d9f444408cf9c034830d8705/${users}/${id}`)
+        let res=await axios.delete(`https://crudcrud.com/api/a6be8c49618848a6b5302fd47926cd86/${users}/${id}`)
             
                value=res.data.filter(item=>item._id!==id);
                setValue(value)
@@ -27,7 +27,7 @@ const CartItem=(props)=>{
     
     const onAddHandler=(id,quantity,title,amount,imageUrl)=>{
        
-      axios.put(`https://crudcrud.com/api/7f3dc144d9f444408cf9c034830d8705/${users}/${id}`,{quantity:quantity+1,
+      axios.put(`https://crudcrud.com/api/a6be8c49618848a6b5302fd47926cd86/${users}/${id}`,{quantity:quantity+1,
     title:title,
     amount:amount,
     imageUrl:imageUrl
@@ -39,13 +39,12 @@ const CartItem=(props)=>{
     }
     
         useEffect(()=>{
-            axios.get(`https://crudcrud.com/api/7f3dc144d9f444408cf9c034830d8705/${users}`)
+            axios.get(`https://crudcrud.com/api/a6be8c49618848a6b5302fd47926cd86/${users}`)
             .then((res)=>{
                 setValue(res.data);
             })
 
         },[])
-        
         
         
     return(
