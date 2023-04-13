@@ -9,19 +9,7 @@ const Cart=(props)=>{
     Cartcntx.items.forEach(item=>{
         quantity=quantity+Number(item.quantity)
     })
-    val.forEach(item=>{
-        quantity=quantity+Number(item.quantity);
-    })
-    const userEmail=localStorage.getItem('email');
-        const user=userEmail.replace('.','q');
-        const users=user.replace('@','s')
-    useEffect(()=>{
-        axios.get(`https://crudcrud.com/api/a6be8c49618848a6b5302fd47926cd86/${users}`)
-        .then((res)=>{
-            setVal(res.data);
-        })
-
-    },[])
+   
     
     return(
         <div>

@@ -1,90 +1,116 @@
 import CartContext from './CartContext';
-import {useState,useReducer} from 'react'
+import {useState,useReducer,useEffect} from 'react'
 import axios from 'axios';
-const defaultCartState={
-    items:[],
-    totalAmount:0,
-}
-const cartreducer=(state,action)=>{
-    if(action.type==='ADD')
-    {
-        const updatedTotalAmount=state.totalAmount+action.item.amount*action.item.quantity;
-        const existingCartIndex=state.items.findIndex(
-            (item)=>item.id===action.item.id
+const CreateProvider = (props) => {
+    const [items, updateItems] = useState([]);
+    const email = localStorage.getItem("email");
+    let crudEmail;
+    if (email != null) {
+      crudEmail = email.replace(/[@.]/g, "");
+    }
+  
+    useEffect(() => {
+      axios
+        .get(
+          `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}`
         )
-        const existingCart=state.items[existingCartIndex];
-        let updatedItems;
-        if(existingCart)
-        {
-          
-            const updatedItem={
-                ...existingCart,
-                quantity:existingCart.quantity+action.item.quantity
-            }
-            updatedItems=[...state.items];
-            updatedItems[existingCartIndex]=updatedItem;
-        }
-        else{ 
-            updatedItems=state.items.concat(action.item);
-            
-            
-        }
-              return{
-            items:updatedItems,
-            totalAmount:updatedTotalAmount
+        .then((res) => {
+          let cartItems = [];
+          for (let i = 0; i < res.data.length; i++) {
+            let item = res.data[i];
+            cartItems.push(item);
+          }
+          updateItems(cartItems);
+        })
+        .catch((err) => console.log(err));
+    }, [crudEmail]);
+  
+    const addItemToCartHandler = (item) => {
+      const existingItems = [...items];
+      const itemIdx = existingItems.findIndex((i) => i.title === item.title);
+      if (itemIdx !== -1) {
+        console.log(existingItems[itemIdx]);
+        const cartObj = {
+          price: existingItems[itemIdx].price,
+          title: existingItems[itemIdx].title,
+          quantity: Number(existingItems[itemIdx].quantity) + 1,
+          imageUrl: existingItems[itemIdx].imageUrl,
         };
+        axios
+          .put(
+            `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}/${existingItems[itemIdx]._id}`,
+            cartObj
+          )
+          .then(() => {
+            let newCartItems = [...items];
+            // newCartItems[itemIdx].quantity = cartObj.quantity;
+            newCartItems[itemIdx].quantity++;
+            updateItems(newCartItems);
+          });
+      } else {
+        axios
+          .post(
+            `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}`,
+            item
+          )
+          .then((response) => {
+            updateItems([...items, response.data]);
+          })
+          .catch((err) => console.log(err));
+      }
+    };
+    const removeItemFromCartHandler = (item) => {
+      const existingItems = [...items];
+      const itemIdx = existingItems.findIndex((i) => i.title === item.title);
+      if (item.quantity > 1) {
+        const cartObj = {
+          price: item.price,
+          title: item.title,
+          quantity: Number(item.quantity) - 1,
+          imageUrl: item.imageUrl,
+        };
+        axios
+          .put(
+            `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}/${existingItems[itemIdx]._id}`,
+            cartObj
+          )
+          .then(() => {
+            let newCartItems = [...items];
+            newCartItems[itemIdx].quantity = cartObj.quantity;
+            updateItems(newCartItems);
+          });
+      } else if (item.quantity === 1) {
+        axios
+          .delete(
+            `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}/${item._id}`
+          )
+          .then((response) => {
+            const existingItems = [...items];
+            const itemIdx = existingItems.findIndex((i) => i._id === item._id);
+            existingItems.splice(itemIdx, 1);
+            updateItems(existingItems);
+          })
+  
+          .catch((err) => console.log(err));
+      }
+    };
+    function updateItemsHandler(items) {
+      updateItems(items); //setItems
     }
-    if(action.type='REMOVE')
-    {
-        const existingCartIndex=state.items.findIndex(
-            (item)=>item.id===action.id
-        )
-        const existingCart=state.items[existingCartIndex];
-        let updatedItems; 
-        const updatedTotalAmount=state.totalAmount-existingCart.amount;
-        if(existingCart.quantity===1)
-        {
-            updatedItems=state.items.filter(item=>item.id!=action.id);
-        }
-        else{
-            const updatedItem={
-                ...existingCart,
-                quantity:existingCart.quantity-1
-            }
-            updatedItems=[...state.items];
-            updatedItems[existingCartIndex]=updatedItem;
-
-        }
-        return{
-            items:updatedItems,
-            totalAmount:updatedTotalAmount
-        }
-
-
-    }
-    
-        return defaultCartState
-
-
-
-}
-const CreateProvider=(props)=>{
-    const [cartstate,cartAction]=useReducer(cartreducer,defaultCartState)
-    const addItemHandler=item=>{
-       cartAction({type:'ADD',item:item}) 
+  
+    const cartContext = {
+      items: items,
+      addItem: addItemToCartHandler,
+      removeItem: removeItemFromCartHandler,
+      update: updateItemsHandler,
     };
-    const removeItemHandler=id=>{
-       cartAction({type:'REMOVE',id:id}) 
-    };
-
-    const cartContext={
-        items:cartstate.items,
-        totalAmount:cartstate.totalAmount,
-        addItem:addItemHandler,
-        removeItem:removeItemHandler
-    };
-        return<CartContext.Provider value={cartContext}>
-            {props.children}
-        </CartContext.Provider>
-};
-export default CreateProvider;
+    return (
+      <CartContext.Provider value={cartContext}>
+        {/* {console.log(cartContext)} */}
+        {props.children}
+      </CartContext.Provider>
+    );
+  };
+  
+  export default CreateProvider;
+  

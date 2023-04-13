@@ -7,7 +7,7 @@ let productsArr=[
 
         title:'Album 1',
         
-        amount: 100,
+        price: 100,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
         id:'s1',
@@ -19,7 +19,7 @@ let productsArr=[
         
         title: 'Album 2',
         
-        amount: 50,
+        price: 50,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
         id:'s2',
@@ -30,7 +30,7 @@ let productsArr=[
         
         title: 'Album 3',
         
-        amount: 70,
+        price: 70,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
         id:'s3',
@@ -41,7 +41,7 @@ let productsArr=[
         
         title: 'Album 4',
         
-        amount: 100,
+        price: 100,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
         id:'s4',
@@ -63,7 +63,7 @@ const ProductDetails=(props)=>{
                         <Card>
                             <Card.Body>
                                 <h2>{item.title}</h2>
-                                <h6 style={{textAlign:'revert'}}>Amount:${item.amount}</h6> <Figure>
+                                <h6 style={{textAlign:'revert'}}>Amount:${item.price}</h6> <Figure>
                              <Figure.Image
                              width={171}
                             height={180}

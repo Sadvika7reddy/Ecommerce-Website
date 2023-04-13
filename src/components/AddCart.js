@@ -9,21 +9,8 @@ const AddCart=(props)=>{
     const EventHandler=(event)=>{
         event.preventDefault();
         Cartcntx.addItem(props.item);
-        const obj=props.item
-        const userEmail=localStorage.getItem('email');
-        const user=userEmail.replace('.','q');
-        const users=user.replace('@','s')
-        console.log(users);
-            axios.post(`https://crudcrud.com/api/a6be8c49618848a6b5302fd47926cd86/${users}`,obj)
-                .then((res)=>{
-                   setName(res.data);
-                }) 
-
         
-        
-         
-              
-        
+          
     }
     return (
         <div class="position-end">

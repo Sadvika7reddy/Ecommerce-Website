@@ -13,7 +13,7 @@ import AuthContext from './components/UI/Context';
 const Apps=()=>{
     const Authcntx=useContext(AuthContext)
     async function EventItemhandler(expenceData){
-        const response=await fetch('https://add-movies-c908f-default-rtdb.firebaseio.com/details.json',{
+        const response=await fetch('https://e-commerce-f48e5-default-rtdb.firebaseio.com/details.json',{
             method:'POST',
             body:JSON.stringify(expenceData),
             headers:{

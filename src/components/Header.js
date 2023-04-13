@@ -1,8 +1,17 @@
 import React from 'react';
 import {Navbar,Button,Container} from 'react-bootstrap';
 import Cart from './Cart';
+import { useContext } from 'react';
+import AuthContext from './UI/Context';
 import {Link,Outlet} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const Header=(props)=>{
+  const cartCntx=useContext(AuthContext);
+  const history=useNavigate();
+  const LogOutHandler=()=>{
+    cartCntx.logOut();
+  history('/login');
+  }
     return(
         <div>
             <Navbar bg='dark' expand='sm' variant='dark'>
@@ -21,6 +30,9 @@ const Header=(props)=>{
           </Navbar.Brand>
           <Navbar.Brand>
             <Link to='/login'>Login Page</Link>
+          </Navbar.Brand>
+          <Navbar.Brand>
+            <Button onClick={LogOutHandler}>Logout</Button>
           </Navbar.Brand>
         </Container>
       </Navbar>
