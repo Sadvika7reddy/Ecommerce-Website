@@ -12,7 +12,7 @@ const CreateProvider = (props) => {
     useEffect(() => {
       axios
         .get(
-          `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}`
+          `https://crudcrud.com/api/6a7b719aea434ba38249574af0a6aa8e/cart${crudEmail}`
         )
         .then((res) => {
           let cartItems = [];
@@ -38,7 +38,7 @@ const CreateProvider = (props) => {
         };
         axios
           .put(
-            `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}/${existingItems[itemIdx]._id}`,
+            `https://crudcrud.com/api/6a7b719aea434ba38249574af0a6aa8e/cart${crudEmail}/${existingItems[itemIdx]._id}`,
             cartObj
           )
           .then(() => {
@@ -50,7 +50,7 @@ const CreateProvider = (props) => {
       } else {
         axios
           .post(
-            `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}`,
+            `https://crudcrud.com/api/6a7b719aea434ba38249574af0a6aa8e/cart${crudEmail}`,
             item
           )
           .then((response) => {
@@ -71,7 +71,7 @@ const CreateProvider = (props) => {
         };
         axios
           .put(
-            `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}/${existingItems[itemIdx]._id}`,
+            `https://crudcrud.com/api/6a7b719aea434ba38249574af0a6aa8e/cart${crudEmail}/${existingItems[itemIdx]._id}`,
             cartObj
           )
           .then(() => {
@@ -82,7 +82,7 @@ const CreateProvider = (props) => {
       } else if (item.quantity === 1) {
         axios
           .delete(
-            `https://crudcrud.com/api/73fd1a3c253241c2a04b0a31bff7d11f/cart${crudEmail}/${item._id}`
+            `https://crudcrud.com/api/6a7b719aea434ba38249574af0a6aa8e/cart${crudEmail}/${item._id}`
           )
           .then((response) => {
             const existingItems = [...items];

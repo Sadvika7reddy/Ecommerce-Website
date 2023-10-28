@@ -28,7 +28,7 @@ const CartItem=(props)=>{
     return (
       <Model>
         <div>
-          <button className={classes.closeButton} onClick={props.onClose}>
+          <button onClick={props.onClose}>
             X
           </button>
         </div>
